@@ -1,8 +1,8 @@
 ## Interface: 70300
 ## Title: Xian
-## Notes: xian test ui
+## Notes: YuXian ui
 ## Title-zhTW: |cffFF2D2D[戰鬥]|r 昱賢的第一個ui專案
-## Notes-zhTW: Xian 預計製作技能combat log event喊話功能
+## Notes-zhTW: Xian 預計製作技能event喊話功能
 ## Author: Xian
 ## Version: 0.1.0
 ## SavedVariables: xianDB
