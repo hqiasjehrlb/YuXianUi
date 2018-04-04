@@ -26,17 +26,17 @@ end
 
 local function unitSpellCastS(...)
   local status, caster, spellName, spellRank, spellIdCounter, spellId = ...;
-  local target = UnitName("target");
+  local target = UnitName("target") or "";
   local player = UnitName("player");
   local linkStr = "|cff71d5ff|Hspell:"..spellId.."|h["..spellName.."]|h|r";
   if caster == "player" then
     if status == "SUCCEEDED" then
-      local talks = xianSetting.defaultSet.SUCCESS[spellName];
+      local talks = xianSetting.SUCCESS[spellName];
       if talks ~= nil and talks[1] ~= nil then
         say(talks, 1, player, linkStr, target);
       end
     elseif status == "START" then
-      local talks = xianSetting.defaultSet.SEND[spellName];
+      local talks = xianSetting.SEND[spellName];
       if talks ~= nil and talks[1] ~= nil then
         say(talks, 1, player, linkStr, target);
       end
@@ -45,8 +45,7 @@ local function unitSpellCastS(...)
 end
 
 function xianCore.create(theFrame)
-  xianSetting.setVar();
-  xianCore.frame = theFrame or CreateFrame("xianCoreFrame");
+  xianCore.frame = theFrame or CreateFrame("FRAME");
   -- register events
   xianCore.frame:RegisterEvent("UNIT_SPELLCAST_START");
   xianCore.frame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
@@ -63,3 +62,5 @@ function xianCore.create(theFrame)
     end
   end);
 end
+
+xianCore.create();

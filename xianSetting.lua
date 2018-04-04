@@ -1,11 +1,9 @@
-xianSetting = {};
-
-local defaultSet = {
-	["SEND"] = {
-		["回命訣"] = {
-			{
-				["int"] = 1,
-				["text"] = "我召喚你回來！",
+xianSetting = {
+  SEND = {
+    ["回命訣"] = {
+      {
+        ["int"] = 1,
+        ["text"] = "我召喚你回來！",
       },
       {
         ["int"] = 2,
@@ -28,8 +26,8 @@ local defaultSet = {
       ["int"] = 0,
       ["text"] = "該起床囉！躺著的小廢物們~",
     },
-	},
-	["SUCCESS"] = {
+  },
+  SUCCESS = {
     ["回命訣"] = {
       {
         ["int"] = 1,
@@ -81,10 +79,4 @@ local defaultSet = {
       },
     },
   },
-}
-
-function xianSetting.setVar()
-  xianSetting.defaultSet = defaultSet;
-  --xianDB = nil;
-  --xianDB = defaultSet
-end
+};

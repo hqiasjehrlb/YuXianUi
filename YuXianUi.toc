@@ -12,5 +12,3 @@
 
 xianSetting.lua
 xianCore.lua
-
-xian.xml
