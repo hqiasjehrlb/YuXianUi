@@ -2,12 +2,19 @@ xianCore = {};
 
 local function say(talks, idx, player, linkStr, target)
   local ch = "YELL";
-  if UnitIsGroupAssistant("player") or UnitIsGroupLeader("player") then
-    ch = "RAID_WARNING";
-  elseif UnitInRaid("player") then
-    ch = "RAID";
-  elseif UnitInParty("player") then
-    ch = "PARTY"
+  if IsInInstance() then
+    -- local name, itype, difficultyIndex, difficultyName = GetInstanceInfo();
+    if HasLFGRestrictions() then
+      ch = "INSTANCE_CHAT";
+    elseif IsInRaid() then
+      if UnitIsGroupAssistant("player") or UnitIsGroupLeader("player") then
+        ch = "RAID_WARNING";
+      else
+        ch = "RIAD";
+      end
+    else
+      ch = "PARTY";
+    end
   end
   local text = talks[idx]["text"];
   local t = talks[idx]["int"];
