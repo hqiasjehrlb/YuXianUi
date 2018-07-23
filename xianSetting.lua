@@ -454,12 +454,6 @@ xianSetting = {
         ["text"] = "%player 開啟無敵蛋殼!! %skill"
       }
     },
-    [19750] = {
-      {
-        ["int"] = 1,
-        ["text"] = "為 %target 施放 %skill~"
-      }
-    },
     [1022] = {
       {
         ["int"] = 1,
