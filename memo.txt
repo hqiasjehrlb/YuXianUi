@@ -1,0 +1,12 @@
+WARRIOR       戰士
+MAGE          法師
+WARLOCK       術士
+DRUID         小D
+DEATHKNIGHT   死騎
+PALADIN       聖騎
+MONK          武僧
+DEMONHUNTER   DH
+SHAMAN        薩滿
+PRIEST        牧師
+HUNTER        獵人
+ROGUE         盜賊
