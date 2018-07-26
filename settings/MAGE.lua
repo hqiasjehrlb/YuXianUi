@@ -1,7 +1,7 @@
 xianMAGE = { -- 法師
   SEND = {},
   SUCCESS = {
-    ["時間扭曲"] = { --
+    [80353] = { -- YY!
       {
         ["int"] = 0,
         ["text"] = "%skill！！",
