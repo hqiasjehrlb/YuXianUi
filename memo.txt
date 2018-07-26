@@ -1,3 +1,4 @@
+職業對應
 WARRIOR       戰士
 MAGE          法師
 WARLOCK       術士

@@ -1,6 +1,6 @@
 xianPRIEST = {
   SEND = {
-    [64843] = {
+    [64843] = { -- 魔幻舞台
       {
         ["int"] = 4,
         ["text"] = "cast %skill !"

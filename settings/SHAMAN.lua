@@ -1,4 +1,4 @@
-xianWARRIOR = {
+xianSHAMAN = {
   SEND = {},
   SUCCESS = {},
 };
