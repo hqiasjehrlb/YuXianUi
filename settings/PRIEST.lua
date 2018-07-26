@@ -27,7 +27,5 @@ xianPRIEST = { -- 牧師
       },
     },
   },
-  SUCCESS = {
-    
-  },
+  SUCCESS = {},
 };
