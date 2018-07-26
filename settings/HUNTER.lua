@@ -1,4 +1,4 @@
-xianHUNTER = {
+xianHUNTER = { -- 獵人
   SEND = {},
   SUCCESS = {
     [264667] = { --寶寶YY

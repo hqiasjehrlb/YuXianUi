@@ -1,4 +1,4 @@
-xianPRIEST = {
+xianPRIEST = { -- 牧師
   SEND = {
     [64843] = { -- 魔幻舞台
       {

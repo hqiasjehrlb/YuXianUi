@@ -1,4 +1,4 @@
-xianDEATHKNIGHT = {
+xianDEATHKNIGHT = { -- DK
   SEND = {},
   SUCCESS = {},
 };

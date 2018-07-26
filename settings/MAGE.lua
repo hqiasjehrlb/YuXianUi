@@ -1,4 +1,4 @@
-xianMAGE = {
+xianMAGE = { -- 法師
   SEND = {},
   SUCCESS = {
     ["時間扭曲"] = { --

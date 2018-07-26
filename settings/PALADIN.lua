@@ -1,4 +1,4 @@
-xianPALADIN = {
+xianPALADIN = { -- 聖騎
   SEND = {
     ["救贖"] = {
       {

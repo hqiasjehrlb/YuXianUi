@@ -1,4 +1,4 @@
-xianMONK = {
+xianMONK = { -- 武僧
   SEND = {
     [115178] = { -- 回命訣
       {

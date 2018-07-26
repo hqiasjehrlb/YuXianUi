@@ -1,4 +1,4 @@
-xianDEMONHUNTER = {
+xianDEMONHUNTER = { -- DH
   SEND = {},
   SUCCESS = {},
 };

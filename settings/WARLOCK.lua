@@ -1,4 +1,4 @@
-xianWARLOCK = {
+xianWARLOCK = { -- 術士
   SEND = {
     ["製造靈魂之井"] = {
       {
