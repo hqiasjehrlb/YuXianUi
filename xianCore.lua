@@ -15,10 +15,14 @@ local skillList = {
   ["ROGUE"] = xianROGUE,
 };
 local xianSetting = nil;
+local channelList = {};
 
 local spellTarget = {};
 
-local function say(talks, idx, player, linkStr, target)
+local function say(talks, idx, player, linkStr, target, spellId)
+  if spellId and channelList[spellId] ~= true then
+    return ;
+  end
   local ch = "YELL";
   if IsInInstance() then
     if HasLFGRestrictions() then
@@ -33,8 +37,11 @@ local function say(talks, idx, player, linkStr, target)
       ch = "PARTY";
     end
   end
-  if talks["ch"] ~= nil then
-    ch = talks["ch"];
+  if talks[1]["ch"] ~= nil then
+    ch = talks[1]["ch"];
+  end
+  if talks[1]["random"] == true then
+    idx = math.random(table.getn(talks));
   end
   local text = talks[idx]["text"];
   local t = talks[idx]["int"];
@@ -43,11 +50,19 @@ local function say(talks, idx, player, linkStr, target)
   text = string.gsub(text, "%%target", target);
 
   SendChatMessage(text, ch);
-  idx = idx + 1;
-  if idx <= table.getn(talks) then
-    C_Timer.After(t, function()
-      say(talks, idx, player, linkStr, target);
-    end);
+  if talks[1]["random"] ~= true or spellId then
+    if spellId then
+      C_Timer.After(t, function()
+        say(talks, idx, player, linkStr, target, spellId);
+      end);
+    else
+      idx = idx + 1;
+      if idx <= table.getn(talks) then
+        C_Timer.After(t, function()
+          say(talks, idx, player, linkStr, target);
+        end);
+      end
+    end
   end
 end
 
@@ -77,6 +92,11 @@ local function unitSpellCastS(...)
       if talks ~= nil and talks[1] ~= nil then
         say(talks, 1, player, linkStr, target);
       end
+    elseif status == "CHANNEL" then
+      local talks = xianSetting.CHANNEL[spellName] or xianSetting.CHANNEL[spellId];
+      if talks ~= nil and talks[1] ~= nil then
+        say(talks, 1, player, linkStr, target, spellId);
+      end
     end
   end
 end
@@ -91,6 +111,11 @@ local function mergeSetting(playerSet)
     if playerSet["SUCCESS"] ~= nil then
       for k, v in pairs(playerSet["SUCCESS"]) do
         xianCOMMON["SUCCESS"][k] = v;
+      end
+    end
+    if playerSet["CHANNEL"] ~= nil then
+      for k, v in pairs(playerSet["CHANNEL"]) do
+        xianCOMMON["CHANNEL"][k] = v;
       end
     end
   end
@@ -111,11 +136,13 @@ function xianCore.create(theFrame)
   -- register events
   xianCore.frame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
   xianCore.frame:RegisterEvent("UNIT_SPELLCAST_SENT");
+  xianCore.frame:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START");
+  xianCore.frame:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
 
   xianCore.frame:SetScript("OnEvent", function(...)
-    local table1, event = ...;
+    local _, event = ...;
     if testMode then
-      print(...); -- test mode
+      print(...) -- test mode
     end
     if event == "UNIT_SPELLCAST_SUCCEEDED" then
       unitSpellCastS("SUCCEEDED", select(3, ...));
@@ -123,6 +150,13 @@ function xianCore.create(theFrame)
       local c, t, _, s = select(3, ...);
       spellTarget[s] = t;
       unitSpellCastS("START", c, _, s);
+    elseif event == "UNIT_SPELLCAST_CHANNEL_START" then
+      local c, _, s = select(3, ...);
+      channelList[s] = true;
+      unitSpellCastS("CHANNEL", c, _, s);
+    elseif event == "UNIT_SPELLCAST_CHANNEL_STOP" then
+      local _, _, s = select(3, ...);
+      channelList[s] = nil;
     end
   end);
 end
