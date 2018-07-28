@@ -20,9 +20,7 @@ local channelList = {};
 local spellTarget = {};
 
 local function say(talks, idx, player, linkStr, target, spellId)
-  if spellId and channelList[spellId] ~= true then
-    return ;
-  end
+  local origIdx = idx;
   local ch = "YELL";
   if IsInInstance() then
     if HasLFGRestrictions() then
@@ -43,11 +41,25 @@ local function say(talks, idx, player, linkStr, target, spellId)
   if talks[1]["random"] == true then
     idx = math.random(table.getn(talks));
   end
-  local text = talks[idx]["text"];
-  local t = talks[idx]["int"];
+  if spellId then
+    idx = origIdx;
+  end
+  local talk = talks[idx];
+  local text = talk["text"];
+  if spellId and channelList[spellId] == nil and talk["end"] then
+    text = talk["end"];
+  end
+  local t = talk["int"];
   text = string.gsub(text, "%%player", player);
   text = string.gsub(text, "%%skill", linkStr);
   text = string.gsub(text, "%%target", target);
+
+  if spellId and channelList[spellId] == nil then
+    if talk["end"] then
+      SendChatMessage(text, ch);
+    end
+    return ;
+  end
 
   SendChatMessage(text, ch);
   if talks[1]["random"] ~= true or spellId then
@@ -77,25 +89,24 @@ local function unitSpellCastS(...)
   local linkStr = GetSpellLink(spellId);
   if caster == "player" or caster == "pet" then
     if status == "SUCCEEDED" then
-      local talks = xianSetting.SUCCESS[spellName];
-      if talks == nil then
-        talks = xianSetting.SUCCESS[spellId];
-      end
+      local talks = xianSetting.SUCCESS[spellName] or xianSetting.SUCCESS[spellId];
       if talks ~= nil and talks[1] ~= nil then
         say(talks, 1, player, linkStr, target);
       end
     elseif status == "START" then
-      local talks = xianSetting.SEND[spellName];
-      if talks == nil then
-        talks = xianSetting.SEND[spellId];
-      end
+      local talks = xianSetting.SEND[spellName] or xianSetting.SEND[spellId];
       if talks ~= nil and talks[1] ~= nil then
         say(talks, 1, player, linkStr, target);
       end
     elseif status == "CHANNEL" then
       local talks = xianSetting.CHANNEL[spellName] or xianSetting.CHANNEL[spellId];
       if talks ~= nil and talks[1] ~= nil then
-        say(talks, 1, player, linkStr, target, spellId);
+        local idx = 1;
+        if talks[1]["random"] then
+          idx = math.random(table.getn(talks));
+        end
+        channelList[spellId] = idx;
+        say(talks, idx, player, linkStr, target, spellId);
       end
     end
   end
@@ -151,9 +162,7 @@ function xianCore.create(theFrame)
       spellTarget[s] = t;
       unitSpellCastS("START", c, _, s);
     elseif event == "UNIT_SPELLCAST_CHANNEL_START" then
-      local c, _, s = select(3, ...);
-      channelList[s] = true;
-      unitSpellCastS("CHANNEL", c, _, s);
+      unitSpellCastS("CHANNEL", select(3, ...));
     elseif event == "UNIT_SPELLCAST_CHANNEL_STOP" then
       local _, _, s = select(3, ...);
       channelList[s] = nil;
