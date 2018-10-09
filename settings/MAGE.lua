@@ -307,5 +307,9 @@ xianMAGE = { -- 法師
         ["text"] = "效果結束, 感謝大家的努力～",
       },
     },
+    [2120] = xianCOMMON["EXPLOSION_SUCCESS"], -- 烈焰風暴
+  },
+  CHANNEL = {
+    [2120] = xianCOMMON["EXPLOSION"], -- 烈焰風暴
   },
 };
