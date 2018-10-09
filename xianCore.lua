@@ -19,24 +19,31 @@ local channelList = {};
 
 local spellTarget = {};
 
+local function debugPrint (...)
+  if testMode then
+    print(...);
+  end
+end
+
 local function say(talks, idx, player, linkStr, target, spellId)
   local origIdx = idx;
   local ch = "YELL";
   if IsInInstance() then
+    local instanceName, instanceType = GetInstanceInfo();
     if HasLFGRestrictions() then
       ch = "INSTANCE_CHAT";
-    elseif IsInRaid() then
+    elseif instanceType == "raid" then
       if UnitIsGroupAssistant("player") or UnitIsGroupLeader("player") then
         ch = "RAID_WARNING";
       else
         ch = "RAID";
       end
-    elseif UnitInParty("player") then
+    elseif instanceType == "party" then
       ch = "PARTY";
     end
   end
-  if talks[1]["ch"] ~= nil then
-    ch = talks[1]["ch"];
+  if talks[idx]["ch"] ~= nil then
+    ch = talks[idx]["ch"];
   end
   if talks[1]["random"] == true then
     idx = math.random(table.getn(talks));
@@ -81,9 +88,7 @@ end
 local function unitSpellCastS(...)
   local status, caster, _, spellId = ...;
   local spellName = GetSpellInfo(spellId);
-  if testMode == true then
-    print(caster, spellId, spellName);
-  end
+  debugPrint(caster, spellId, spellName);
   local target = spellTarget[spellId] or "";
   local player = UnitName(caster);
   local linkStr = GetSpellLink(spellId);
@@ -152,9 +157,7 @@ function xianCore.create(theFrame)
 
   xianCore.frame:SetScript("OnEvent", function(...)
     local _, event = ...;
-    if testMode then
-      print(...) -- test mode
-    end
+    debugPrint(...);
     if event == "UNIT_SPELLCAST_SUCCEEDED" then
       unitSpellCastS("SUCCEEDED", select(3, ...));
     elseif event == "UNIT_SPELLCAST_SENT" then
