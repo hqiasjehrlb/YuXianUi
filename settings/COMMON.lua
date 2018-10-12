@@ -107,7 +107,7 @@ xianCOMMON = {
     {
       ["int"] = 1,
       ["ch"] = "YELL",
-      ["text"] = "(∩ ◕_▩ )⊃━☆ Explosion！",
+      ["text"] = "(∩ ●_⊕ )つ━☆ Explosion！",
     },
   }
 };
