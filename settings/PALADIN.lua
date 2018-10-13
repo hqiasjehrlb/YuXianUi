@@ -1,7 +1,5 @@
 xianPALADIN = { -- 聖騎
-  SEND = {
-    [7328] = xianCOMMON["ZANKI"],
-  },
+  SEND = {},
   SUCCESS = {
     [7328] = xianCOMMON["ZANKI_SUCCESS"],
     [642] = { -- 聖盾
@@ -41,5 +39,8 @@ xianPALADIN = { -- 聖騎
         ["text"] = "已施放 %skill 硬邦邦撐8秒!"
       },
     },
+  },
+  CHANNEL = {
+    [7328] = xianCOMMON["ZANKI"],
   },
 };
