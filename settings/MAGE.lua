@@ -4,307 +4,167 @@ xianMAGE = { -- 法師
     [80353] = { -- YY!
       {
         ["int"] = 0,
-        ["text"] = "%skill！！",
+        ["text"] = "%skill！哇呀呀呀呀呀呀呀呀呀呀呀呀呀呀呀！",
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間40秒"
+        ["text"] = "YO! 大家跟上我的節奏, 一起唱起來~"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間39秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "跟上我的tempo 大家唱起來～",
+        ["text"] = "我還是一個宅男"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間38秒"
+        ["text"] = "困在學校 書都讀不完"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間37秒"
+        ["text"] = "每天立正 想聽螳螂叫"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間36秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "- Erlkönig -",
+        ["text"] = "上課認真 研究幹細胞"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間35秒"
+        ["text"] = "我也想要每天都吃腿庫"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間34秒"
+        ["text"] = "但女同學 都不跟我接觸"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間33秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Wer reitet so spät durch Nacht und Wind?",
+        ["text"] = "這個樣子 真是有夠魯"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間32秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Es ist der Vater mit seinem Kind;",
+        ["text"] = "想交女友 狂吃油豆腐"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間31秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Er hat den Knaben wohl in dem Arm,",
+        ["text"] = "地!"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間30秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Er fasst ihn sicher, er hält ihn warm.",
+        ["text"] = "聽說有間 暗巷的神廟 好像非常靈驗"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間29秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Mein Sohn, was birgst du so bang dein Gesicht? –",
+        ["text"] = "地!"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間28秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Siehst, Vater, du den Erlkönig nicht?",
+        ["text"] = "過來拜拜 找個對象 就能跟她牽個紅線"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間27秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Den Erlenkönig mit Kron’ und Schweif? –",
+        ["text"] = "進入大香爐 真心求籤"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間26秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Mein Sohn, es ist ein Nebelstreif. –",
+        ["text"] = "香油錢 就 投了六千"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間25秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "„Du liebes Kind, komm, geh mit mir!",
+        ["text"] = "找了廟公 來幫我解籤"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間24秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Gar schöne Spiele spiel’ ich mit dir;",
+        ["text"] = "上面寫「去你的痘痘那邊」"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間23秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Manch’ bunte Blumen sind an dem Strand,",
+        ["text"] = "神明說想要升天 就要去痘痘那邊"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間22秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Meine Mutter hat manch gülden Gewand.“ –",
+        ["text"] = "你是說.....臉上的痘痘嗎？"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間21秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Mein Vater, mein Vater, und hörest du nicht,",
+        ["text"] = "天機不可洩漏"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間20秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Was Erlenkönig mir leise verspricht? –",
+        ["text"] = "你再多給我六千 帶你去痘痘那邊"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間19秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Sei ruhig, bleibe ruhig, mein Kind;",
+        ["text"] = "這麼貴啊"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間18秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "In dürren Blättern säuselt der Wind. –",
+        ["text"] = "我會騙你嗎? 我說到做到"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間17秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "„Willst, feiner Knabe, du mit mir gehn?",
+        ["text"] = "skinlife"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間16秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Meine Töchter sollen dich warten schön;",
+        ["text"] = "整棟整棟包下來 助興七小時"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間15秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Meine Töchter führen den nächtlichen Reihn",
+        ["text"] = "把你雙腿抬起來 跳進游泳池"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間14秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Und wiegen und tanzen und singen dich ein.“ –",
+        ["text"] = "整棟整棟包下來 助興七小時"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間13秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Mein Vater, mein Vater, und siehst du nicht dort",
+        ["text"] = "把你雙腿抬起來 跳進游泳池"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間12秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Erlkönigs Töchter am düstern Ort? –",
+        ["text"] = "快去痘痘那邊才會爽"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間11秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Mein Sohn, mein Sohn, ich seh’ es genau:",
+        ["text"] = "快去痘痘那邊才會爽"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間10秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Es scheinen die alten Weiden so grau. –",
+        ["text"] = "快去痘痘那邊才會爽"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間9秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "„Ich liebe dich, mich reizt deine schöne Gestalt;",
+        ["text"] = "快去痘痘那邊 skinlife"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間8秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Und bist du nicht willig, so brauch’ ich Gewalt.“ –",
+        ["text"] = "保健室 有位女老師"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間7秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Mein Vater, mein Vater, jetzt faßt er mich an!",
+        ["text"] = "腿庫飯 不准我再吃"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間6秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Erlkönig hat mir ein Leids getan! –",
+        ["text"] = "問他 下課要去哪邊"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間5秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Dem Vater grauset’s; er reitet geschwind,",
+        ["text"] = "我想跟妳....."
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間4秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Er hält in Armen das ächzende Kind,",
+        ["text"] = "去你的痘痘那邊"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間3秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "Erreicht den Hof mit Mühe und Not;",
+        ["text"] = "你的分泌物真的太多"
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間2秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "In seinen Armen das Kind war tot.",
+        ["text"] = "痘痘洗乾淨 才能再摸..."
       },
       {
         ["int"] = 1,
-        ["text"] = "buff剩餘時間1秒"
-      },
-      {
-        ["int"] = 0,
-        ["text"] = "效果結束, 感謝大家的努力～",
+        ["text"] = "歌聲樂聲．盡在揚聲"
       },
     },
     [2120] = xianCOMMON["EXPLOSION_SUCCESS"], -- 烈焰風暴

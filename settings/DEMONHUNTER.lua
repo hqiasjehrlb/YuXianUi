@@ -10,7 +10,11 @@ xianDEMONHUNTER = { -- DH
     [187827] = {
       {
         ["int"] = 1,
-        ["text"] = "%player 已開啟 %skill 硬梆梆撐15秒!"
+        ["text"] = "在愛與勇氣以及希望的名義之下"
+      },
+      {
+        ["int"] = 1,
+        ["text"] = "魔法公主神聖誕生!"
       },
       {
         ["int"] = 1,
@@ -19,3 +23,5 @@ xianDEMONHUNTER = { -- DH
     },
   },
 };
+
+

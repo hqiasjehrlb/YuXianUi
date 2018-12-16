@@ -1,10 +1,10 @@
-## Interface: 80000
+## Interface: 80100
 ## Title: Xian
 ## Notes: YuXian ui
 ## Title-zhTW: |cffFF2D2D[戰鬥]|r 昱賢的第一個ui專案
 ## Notes-zhTW: Xian 預計製作技能event喊話功能
 ## Author: Xian
-## Version: 0.1.0
+## Version: 8.1.0
 ## SavedVariables: xianDB
 
 ## X-License: MIT/X

@@ -9,7 +9,7 @@ xianCLASS = {
     SEND = {
         ["技能名稱1"] = {
             {
-                ["ch"] = "EMOTE", -- <-可以設定表情喊話(一律設定在第一句, 為了不影響array length)
+                ["ch"] = "EMOTE", -- <-可以設定表情喊話
                 ["random"] = true/false -- <-隨機喊話(從array隨機挑一句出來喊, 一律設定在第一句, 為了不影響array length)
                 int = 1,
                 text = "技能1開始施法喊的第一句話",
