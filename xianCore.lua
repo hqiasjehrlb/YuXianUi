@@ -25,7 +25,7 @@ local function debugPrint (...)
   end
 end
 
-local function say(talks, idx, player, linkStr, target, spellId)
+local function say(talks, idx, player, linkStr, target, spellId, extSpell)
   local origIdx = idx;
   local ch = "YELL";
   if IsInInstance() then
@@ -60,6 +60,9 @@ local function say(talks, idx, player, linkStr, target, spellId)
   text = string.gsub(text, "%%player", player);
   text = string.gsub(text, "%%skill", linkStr);
   text = string.gsub(text, "%%target", target);
+  if extSpell then
+    text = string.gsub(text, "%%tskill", extSpell);
+  end
 
   if spellId and channelList[spellId] == nil and spellingList[spellId] == nil then
     if talk["end"] then
@@ -95,13 +98,14 @@ local function say(talks, idx, player, linkStr, target, spellId)
 end
 
 local function unitSpellCastS(...)
-  local status, caster, _, spellId = ...;
+  local status, caster, _, spellId, extSpellId = ...;
   local spellName = GetSpellInfo(spellId);
-  debugPrint(caster, spellId, spellName);
   local target = spellTarget[spellId] or "";
   local player = UnitName(caster);
   local linkStr = GetSpellLink(spellId);
-  if caster == "player" or caster == "pet" then
+  local extSpell = GetSpellLink(extSpellId);
+  debugPrint(caster, player, spellId, spellName);
+  if caster == "player" or caster == player or caster == "pet" then
     if status == "SUCCEEDED" then
       local talks = xianSetting.SUCCESS[spellName] or xianSetting.SUCCESS[spellId];
       if talks ~= nil and talks[1] ~= nil then
@@ -132,6 +136,13 @@ local function unitSpellCastS(...)
         spellingList[spellId] = idx;
         say(talks, idx, player, linkStr, target, spellId);
       end
+    elseif status == "INTERRUPT" then
+      debugPrint("before say");
+      local talks = xianSetting.INTERRUPT[spellName] or xianSetting.INTERRUPT[spellId];
+      if talks ~= nil and talks[1] ~= nil then
+        debugPrint("get talk");
+        say(talks, 1, player, linkStr, target, nil, extSpell);
+      end
     end
   end
 end
@@ -151,6 +162,14 @@ local function mergeSetting(playerSet)
     if playerSet["CHANNEL"] ~= nil then
       for k, v in pairs(playerSet["CHANNEL"]) do
         xianCOMMON["CHANNEL"][k] = v;
+      end
+    end
+    if xianCOMMON["INTERRUPT"] == nil then
+      xianCOMMON["INTERRUPT"] = {};
+    end
+    if playerSet["INTERRUPT"] ~= nil then
+      for k, v in pairs(playerSet["INTERRUPT"]) do
+        xianCOMMON["INTERRUPT"][k] = v;
       end
     end
   end
@@ -175,6 +194,7 @@ function xianCore.create(theFrame)
   xianCore.frame:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED");
   xianCore.frame:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START");
   xianCore.frame:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
+  xianCore.frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 
   xianCore.frame:SetScript("OnEvent", function(...)
     local _, event = ...;
@@ -196,6 +216,13 @@ function xianCore.create(theFrame)
     elseif event == "UNIT_SPELLCAST_INTERRUPTED" then
       local _, _, s = select(3, ...);
       spellingList[s] = nil;
+    elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
+      local _, e, _, _, c, _, _, _, t, _, _, s, _, _, extS = CombatLogGetCurrentEventInfo();
+      if (e == "SPELL_INTERRUPT") then
+        debugPrint(e, c, t, s, extS);
+        spellTarget[s] = t;
+        unitSpellCastS("INTERRUPT", c, _, s, extS);
+      end
     end
   end);
 end

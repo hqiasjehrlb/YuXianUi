@@ -26,12 +26,6 @@ xianPALADIN = { -- 聖騎
         ["text"] = "%target 趕快使出c8763啊!",
       },
     },
-    [96231] = { -- 責難
-      {
-        ["int"] = 1,
-        ["text"] = "%player 對 %target 施放 %skill 斷法",
-      },
-    },
     [86659] = { -- 遠古諸王
       {
         ["ch"] = "EMOTE",
@@ -43,4 +37,12 @@ xianPALADIN = { -- 聖騎
   CHANNEL = {
     [7328] = xianCOMMON["ZANKI"],
   },
+  INTERRUPT = {
+    [96231] = { -- 責難
+      {
+        ["int"] = 1,
+        ["text"] = "%player 用 %skill 打斷了 %target 的 %tskill",
+      },
+    },
+  }
 };

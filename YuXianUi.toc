@@ -5,7 +5,7 @@
 ## Notes-zhTW: Xian 預計製作技能event喊話功能
 ## Author: Xian
 ## Version: 8.1.0
-## SavedVariables: xianDB
+## SavedVariablesPerCharacter: xianDB
 
 ## X-License: MIT/X
 ## X-Category: Combat
