@@ -35,7 +35,7 @@ local function say(talks, idx, player, linkStr, target, spellId, extSpell)
     elseif instanceType == "raid" then
       if UnitIsGroupAssistant("player") or UnitIsGroupLeader("player") then
         ch = "RAID_WARNING";
-      else
+      elseif IsInRaid() then
         ch = "RAID";
       end
     elseif instanceType == "party" then
@@ -107,17 +107,17 @@ local function unitSpellCastS(...)
   debugPrint(caster, player, spellId, spellName);
   if caster == "player" or caster == player or caster == "pet" then
     if status == "SUCCEEDED" then
-      local talks = xianSetting.SUCCESS[spellName] or xianSetting.SUCCESS[spellId];
+      local talks = xianDB.SUCCESS[spellName] or xianDB.SUCCESS[spellId];
       if talks ~= nil and talks[1] ~= nil then
         say(talks, 1, player, linkStr, target);
       end
     elseif status == "START" then
-      local talks = xianSetting.SEND[spellName] or xianSetting.SEND[spellId];
+      local talks = xianDB.SEND[spellName] or xianDB.SEND[spellId];
       if talks ~= nil and talks[1] ~= nil then
         say(talks, 1, player, linkStr, target);
       end
     elseif status == "CHANNEL" then
-      local talks = xianSetting.CHANNEL[spellName] or xianSetting.CHANNEL[spellId];
+      local talks = xianDB.CHANNEL[spellName] or xianDB.CHANNEL[spellId];
       if talks ~= nil and talks[1] ~= nil then
         local idx = 1;
         if talks[1]["random"] then
@@ -127,7 +127,7 @@ local function unitSpellCastS(...)
         say(talks, idx, player, linkStr, target, spellId);
       end
     elseif status == "SPELLSTART" then
-      local talks = xianSetting.CHANNEL[spellName] or xianSetting.CHANNEL[spellId];
+      local talks = xianDB.CHANNEL[spellName] or xianDB.CHANNEL[spellId];
       if talks ~= nil and talks[1] ~= nil then
         local idx = 1;
         if talks[1]["random"] then
@@ -138,7 +138,7 @@ local function unitSpellCastS(...)
       end
     elseif status == "INTERRUPT" then
       debugPrint("before say");
-      local talks = xianSetting.INTERRUPT[spellName] or xianSetting.INTERRUPT[spellId];
+      local talks = xianDB.INTERRUPT[spellName] or xianDB.INTERRUPT[spellId];
       if talks ~= nil and talks[1] ~= nil then
         debugPrint("get talk");
         say(talks, 1, player, linkStr, target, nil, extSpell);
@@ -148,6 +148,19 @@ local function unitSpellCastS(...)
 end
 
 local function mergeSetting(playerSet)
+  if xianCOMMON["INTERRUPT"] == nil then
+    xianCOMMON["INTERRUPT"] = {};
+  end
+  if xianCOMMON["SEND"] == nil then
+    xianCOMMON["SEND"] = {};
+  end
+  if xianCOMMON["CHANNEL"] == nil then
+    xianCOMMON["CHANNEL"] = {};
+  end
+  if xianCOMMON["SUCCESS"] == nil then
+    xianCOMMON["SUCCESS"] = {};
+  end
+
   if playerSet ~= nil then
     if playerSet["SEND"] ~= nil then
       for k, v in pairs(playerSet["SEND"]) do
@@ -164,9 +177,6 @@ local function mergeSetting(playerSet)
         xianCOMMON["CHANNEL"][k] = v;
       end
     end
-    if xianCOMMON["INTERRUPT"] == nil then
-      xianCOMMON["INTERRUPT"] = {};
-    end
     if playerSet["INTERRUPT"] ~= nil then
       for k, v in pairs(playerSet["INTERRUPT"]) do
         xianCOMMON["INTERRUPT"][k] = v;
@@ -179,11 +189,8 @@ end
 
 function xianCore.create(theFrame)
   local _, playerClass = UnitClass("player");
-  xianSetting = mergeSetting(skillList[playerClass]);
-
-  if xianSetting == nil then
-    return ;
-  end
+  mergeSetting(skillList[playerClass]);
+  xianDB = mergeSetting(xianDB);
 
   xianCore.frame = theFrame or CreateFrame("FRAME");
 
@@ -227,4 +234,17 @@ function xianCore.create(theFrame)
   end);
 end
 
-xianCore.create();
+function xianCore.getSettings (typeName)
+  if xianDB == nil or typeName == nil then
+    return nil;
+  else
+    return xianDB[typeName];
+  end
+end
+
+function xianCore.setDB (typeName, spell, sets)
+  if type(xianDB[typeName]) ~= "table" then
+    xianDB[typeName] = {};
+  end
+  xianDB[typeName][spell] = sets;
+end

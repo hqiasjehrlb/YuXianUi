@@ -41,8 +41,21 @@ xianPALADIN = { -- 聖騎
     [96231] = { -- 責難
       {
         ["int"] = 1,
+        ["ch"] = "YELL",
         ["text"] = "%player 用 %skill 打斷了 %target 的 %tskill",
       },
     },
+    [31935] = { -- 復仇之盾
+      {
+        ["int"] = 1,
+        ["ch"] = "EMOTE",
+        ["text"] = "%player 對 %target 扔了一個 %skill 打斷了 %target 的 %tskill"
+      },
+      {
+        ["int"] = 1,
+        ["ch"] = "YELL",
+        ["text"] = "%target 已經被我打到暫時說不出話了!"
+      }
+    }
   }
 };

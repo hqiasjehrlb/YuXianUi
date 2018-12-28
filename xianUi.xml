@@ -1,0 +1,195 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+  <Script file="xianUi.lua"/>
+
+  <Frame name="InterfaceOptionsYuXianUiPanel" hidden="true" parent="InterfaceOptionsFramePanelContainer">
+    <Layers>
+      <Layer level="ARTWORK">
+        <FontString name="$parentTitle" text="YuXianUi" inherits="GameFontNormalLarge">
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="16" y="-16"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+        <FontString name="$parentVersion" text="YuXianUi_VERSION" inherits="GameFontNormalLarge">
+          <Anchors>
+            <Anchor point="LEFT" relativeTo="$parentTitle" relativePoint="RIGHT">
+              <Offset>
+                <AbsDimension x="6" y="-0"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+        <FontString name="$parentSubText" text="YuXianUi_UIPANEL_SUBTEXT" inherits="GameFontHighlightSmall" nonspacewrap="true" maxLines="2" justifyH="LEFT" justifyV="TOP">
+          <Size>
+              <AbsDimension x="0" y="24" />
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT" relativeTo="$parentTitle" relativePoint="BOTTOMLEFT">
+              <Offset>
+                <AbsDimension x="16" y="-8" />
+              </Offset>
+            </Anchor>
+            <Anchor point="RIGHT">
+              <Offset>
+                <AbsDimension x="-24" y="0" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Scripts>
+      <OnLoad>
+        self.name = "YuXianUi";
+        self.okay = xianUi_ok;
+        self.cancel = xianUi_cancel;
+        xianUiOnload(self);
+      </OnLoad>
+    </Scripts>    
+    <Frames>
+      <Frame name="$parentAddSkillFrame">
+        <Size>
+          <AbsDimension x="180" y="200" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentSubText" relativePoint="BOTTOMLEFT">
+            <Offset>
+              <AbsDimension x="0" y="-60" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer level="ARTWORK">
+            <!-- ui debug用套底色
+            <Texture setAllPoints="true">
+              <Color r="0" g="60" b="120" a="0.2" />
+            </Texture> -->
+            <FontString name="$parentText" text="YuXianUi_ADD_LISTEN_SKILL" inherits="GameFontHighlightSmall" nonspacewrap="true" maxLines="2" justifyH="LEFT" justifyV="TOP">
+              <Size>
+                  <AbsDimension x="0" y="24" />
+              </Size>
+              <Anchors>
+                <Anchor point="TOPLEFT">
+                  <Offset>
+                    <AbsDimension x="0" y="-16"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <EditBox name="$parentBox" letters="16">
+            <Size>
+              <AbsDimension x="150" y="32" />
+            </Size>
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeTo="$parentText" relativePoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="10" y="0" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Layers>
+              <Layer level="BACKGROUND">
+                <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+                  <!--  輸入框的左外框貼圖  -->
+                  <Size>
+                    <AbsDimension x="85" y="32"/>
+                  </Size>
+                  <Anchors>
+                    <Anchor point="LEFT">
+                      <Offset>
+                        <AbsDimension x="-10" y="0"/>
+                      </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <TexCoords left="0" right="0.5" top="0" bottom="1.0" />
+                </Texture>
+                <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+                  <!--  輸入框的右外框貼圖  -->
+                  <Size>
+                    <AbsDimension x="85" y="32"/>
+                  </Size>
+                  <Anchors>
+                    <Anchor point="RIGHT">
+                      <Offset>
+                        <AbsDimension x="10" y="0"/>
+                      </Offset>
+                    </Anchor>
+                  </Anchors>
+                  <TexCoords left="0.5" right="1.0" top="0" bottom="1.0" />
+                </Texture>
+              </Layer>
+            </Layers>
+            <Scripts>
+              <Onload>
+                self:SetAutoFocus(false);
+              </Onload>
+            </Scripts>
+            <FontString inherits="ChatFontNormal" />
+          </EditBox>
+          <Button name="$parentBtnAdd" inherits="OptionsButtonTemplate" text="+">
+            <!-- 增加技能 -->
+            <Anchors>
+              <Anchor point="TOPRIGHT" relativeTo="$parentBox" relativePoint="BOTTOMRIGHT">
+                <Offset>
+                  <AbsDimension x="10" y="0" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Size>
+              <AbsDimension x="30" y="20" />
+            </Size>
+            <Scripts>
+              <OnClick>
+                xianUiAddSkill();
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parentBtnSearch" inherits="OptionsButtonTemplate" text="spellID">
+            <!-- 搜尋技能ID -->
+            <Anchors>
+              <Anchor point="RIGHT" relativeTo="$parentBtnAdd" relativePoint="LEFT">
+                <Offset>
+                  <AbsDimension x="0" y="0" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Size>
+              <AbsDimension x="50" y="20" />
+            </Size>
+            <Scripts>
+              <OnClick>
+                xianUiSearchSkill();
+              </OnClick>
+            </Scripts>
+          </Button>
+        </Frames>
+      </Frame>
+      <Frame name="$parentSetTalkFrame">
+        <Size>
+          <AbsDimension x="400" y="550" />
+        </Size>
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-10" y="-10" />
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer level="ARTWORK">
+            <!-- ui debug用套底色 -->
+            <Texture setAllPoints="true">
+              <Color r="0" g="60" b="120" a="0.2" />
+            </Texture>
+          </Layer>
+        </Layers>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

@@ -24,3 +24,4 @@ settings/PRIEST.lua
 settings/HUNTER.lua
 settings/ROGUE.lua
 xianCore.lua
+xianUi.xml
