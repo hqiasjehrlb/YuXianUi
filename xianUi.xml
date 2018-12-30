@@ -126,6 +126,9 @@
               </Layer>
             </Layers>
             <Scripts>
+              <OnEscapePressed>
+                self:ClearFocus();
+              </OnEscapePressed>
               <Onload>
                 self:SetAutoFocus(false);
               </Onload>
@@ -150,7 +153,7 @@
               </OnClick>
             </Scripts>
           </Button>
-          <Button name="$parentBtnSearch" inherits="OptionsButtonTemplate" text="spellID">
+          <Button name="$parentBtnSearch" inherits="OptionsButtonTemplate" text="YuXianUi_SEARCH_SKILL_ID">
             <!-- 搜尋技能ID -->
             <Anchors>
               <Anchor point="RIGHT" relativeTo="$parentBtnAdd" relativePoint="LEFT">
@@ -170,7 +173,7 @@
           </Button>
         </Frames>
       </Frame>
-      <Frame name="$parentSetTalkFrame">
+      <Frame name="$parentSetTalkFrame" hidden="true">
         <Size>
           <AbsDimension x="400" y="550" />
         </Size>
@@ -183,12 +186,130 @@
         </Anchors>
         <Layers>
           <Layer level="ARTWORK">
-            <!-- ui debug用套底色 -->
+            <!-- ui debug用套底色
             <Texture setAllPoints="true">
               <Color r="0" g="60" b="120" a="0.2" />
-            </Texture>
+            </Texture> -->
+            <FontString name="$parentWaitText" text="YuXianUi_WaitText" inherits="GameFontHighlightSmall">
+              <Anchors>
+                <Anchor point="TOPLEFT">
+                  <Offset>
+                    <AbsDimension x="20" y="-95" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </FontString>
+            <FontString name="$parentWaitSecondsText" text="YuXianUi_WaitSecondsText" inherits="GameFontHighlightSmall">
+              <Anchors>
+                <Anchor point="TOPLEFT">
+                  <Offset>
+                    <AbsDimension x="140" y="-95"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </FontString>
+            <FontString name="$parentTalkContentText" text="YuXianUi_TalkContentText" inherits="GameFontHighlightSmall">
+              <Anchors>
+                <Anchor point="TOPLEFT">
+                  <Offset>
+                    <AbsDimension x="20" y="-130" />
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </FontString>
           </Layer>
         </Layers>
+        <Frames>
+          <EditBox name="$parentInt" letters="5" inherits="InputBoxTemplate">
+            <Size>
+              <AbsDimension x="60" y="32" />
+            </Size>
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+                <Offset>
+                  <AbsDimension x="60" y="-85" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Scripts>
+              <OnEscapePressed>
+                self:ClearFocus();
+              </OnEscapePressed>
+              <Onload>
+                self:SetAutoFocus(false);
+              </Onload>
+            </Scripts>
+            <FontString inherits="ChatFontNormal" />
+          </EditBox>
+          <Button name="$parentRemSkill" inherits="OptionsButtonTemplate" text="YuXianUi_Remove_Skill">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+                <Offset>
+                  <AbsDimension x="20" y="-10" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Size>
+              <AbsDimension x="150" y="20" />
+            </Size>
+            <Scripts>
+              <OnClick>
+                xianUiRemSkill();
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parentAddTalk" inherits="OptionsButtonTemplate" text="+">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+                <Offset>
+                  <AbsDimension x="200" y="-55" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Size>
+              <AbsDimension x="30" y="20" />
+            </Size>
+            <Scripts>
+              <OnClick>
+                xianUiAddTalk();
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parentRemTalk" inherits="OptionsButtonTemplate" text="-">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+                <Offset>
+                  <AbsDimension x="230" y="-55" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Size>
+              <AbsDimension x="30" y="20" />
+            </Size>
+            <Scripts>
+              <OnClick>
+                xianUiRemTalk();
+              </OnClick>
+            </Scripts>
+          </Button>
+          <Button name="$parentSaveTalk" inherits="OptionsButtonTemplate" text="SAVE">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+                <Offset>
+                  <AbsDimension x="340" y="-170" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Size>
+              <AbsDimension x="50" y="20" />
+            </Size>
+            <Scripts>
+              <OnClick>
+                xianUiSaveTalk();
+              </OnClick>
+            </Scripts>
+          </Button>
+        </Frames>
       </Frame>
     </Frames>
   </Frame>

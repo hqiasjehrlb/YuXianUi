@@ -107,17 +107,23 @@ local function unitSpellCastS(...)
   debugPrint(caster, player, spellId, spellName);
   if caster == "player" or caster == player or caster == "pet" then
     if status == "SUCCEEDED" then
-      local talks = xianDB.SUCCESS[spellName] or xianDB.SUCCESS[spellId];
+      local talks = xianDB.SUCCESS[spellName]
+        or xianDB.SUCCESS[spellId]
+        or xianDB.SUCCESS[tostring(spellId)];
       if talks ~= nil and talks[1] ~= nil then
         say(talks, 1, player, linkStr, target);
       end
     elseif status == "START" then
-      local talks = xianDB.SEND[spellName] or xianDB.SEND[spellId];
+      local talks = xianDB.SEND[spellName]
+        or xianDB.SEND[spellId]
+        or xianDB.SEND[tostring(spellId)];
       if talks ~= nil and talks[1] ~= nil then
         say(talks, 1, player, linkStr, target);
       end
     elseif status == "CHANNEL" then
-      local talks = xianDB.CHANNEL[spellName] or xianDB.CHANNEL[spellId];
+      local talks = xianDB.CHANNEL[spellName]
+        or xianDB.CHANNEL[spellId]
+        or xianDB.CHANNEL[tostring(spellId)];
       if talks ~= nil and talks[1] ~= nil then
         local idx = 1;
         if talks[1]["random"] then
@@ -127,7 +133,9 @@ local function unitSpellCastS(...)
         say(talks, idx, player, linkStr, target, spellId);
       end
     elseif status == "SPELLSTART" then
-      local talks = xianDB.CHANNEL[spellName] or xianDB.CHANNEL[spellId];
+      local talks = xianDB.CHANNEL[spellName]
+        or xianDB.CHANNEL[spellId]
+        or xianDB.CHANNEL[tostring(spellId)];
       if talks ~= nil and talks[1] ~= nil then
         local idx = 1;
         if talks[1]["random"] then
@@ -137,8 +145,9 @@ local function unitSpellCastS(...)
         say(talks, idx, player, linkStr, target, spellId);
       end
     elseif status == "INTERRUPT" then
-      debugPrint("before say");
-      local talks = xianDB.INTERRUPT[spellName] or xianDB.INTERRUPT[spellId];
+      local talks = xianDB.INTERRUPT[spellName]
+        or xianDB.INTERRUPT[spellId]
+        or xianDB.INTERRUPT[tostring(spellId)];
       if talks ~= nil and talks[1] ~= nil then
         debugPrint("get talk");
         say(talks, 1, player, linkStr, target, nil, extSpell);
