@@ -240,7 +240,6 @@ function xianUiSaveTalk ()
   local t = SelectedType;
   local s = SelectedSkill;
   local i = SelectedTalk;
-  print(t, s, i);
   if type(xianDB) == "table"
     and type(xianDB[t]) == "table"
     and type(xianDB[t][s]) == "table"
@@ -398,8 +397,4 @@ function xianUiOnload (panel)
 
   InterfaceOptions_AddCategory(mainFrame);
   init();
-end
-
-function xianTest()
-  print(dump(xianDB));
 end
