@@ -1,5 +1,7 @@
 xianCore = {};
 
+local coreFrame;
+
 local skillList = {
   ["WARRIOR"] = xianWARRIOR,
   ["MAGE"] = xianMAGE,
@@ -14,7 +16,6 @@ local skillList = {
   ["HUNTER"] = xianHUNTER,
   ["ROGUE"] = xianROGUE,
 };
-local xianSetting = nil;
 local channelList = {};
 local spellingList = {};
 local spellTarget = {};
@@ -38,7 +39,7 @@ local function say(talks, idx, player, linkStr, target, spellId, extSpell)
       elseif IsInRaid() then
         ch = "RAID";
       end
-    elseif instanceType == "party" then
+    elseif instanceType == "party" and UnitInParty("player") then
       ch = "PARTY";
     end
   end
@@ -196,25 +197,26 @@ local function mergeSetting(playerSet)
   return xianCOMMON;
 end
 
-function xianCore.create(theFrame)
+function xianCore.create()
   local _, playerClass = UnitClass("player");
+
   mergeSetting(skillList[playerClass]);
   xianDB = mergeSetting(xianDB);
 
-  xianCore.frame = theFrame or CreateFrame("FRAME");
+  coreFrame = coreFrame or CreateFrame("Frame", "xianCore");
 
   -- register events 
-  xianCore.frame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
-  xianCore.frame:RegisterEvent("UNIT_SPELLCAST_SENT");
-  xianCore.frame:RegisterEvent("UNIT_SPELLCAST_START");
-  xianCore.frame:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED");
-  xianCore.frame:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START");
-  xianCore.frame:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
-  xianCore.frame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+  coreFrame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
+  coreFrame:RegisterEvent("UNIT_SPELLCAST_SENT");
+  coreFrame:RegisterEvent("UNIT_SPELLCAST_START");
+  coreFrame:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED");
+  coreFrame:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START");
+  coreFrame:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
+  coreFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 
-  xianCore.frame:SetScript("OnEvent", function(...)
+  coreFrame:SetScript("OnEvent", function(...)
     local _, event = ...;
-    debugPrint(...);
+
     if event == "UNIT_SPELLCAST_SUCCEEDED" then
       unitSpellCastS("SUCCEEDED", select(3, ...));
     elseif event == "UNIT_SPELLCAST_SENT" then
@@ -235,25 +237,9 @@ function xianCore.create(theFrame)
     elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
       local _, e, _, _, c, _, _, _, t, _, _, s, _, _, extS = CombatLogGetCurrentEventInfo();
       if (e == "SPELL_INTERRUPT") then
-        debugPrint(e, c, t, s, extS);
         spellTarget[s] = t;
         unitSpellCastS("INTERRUPT", c, _, s, extS);
       end
     end
   end);
-end
-
-function xianCore.getSettings (typeName)
-  if xianDB == nil or typeName == nil then
-    return nil;
-  else
-    return xianDB[typeName];
-  end
-end
-
-function xianCore.setDB (typeName, spell, sets)
-  if type(xianDB[typeName]) ~= "table" then
-    xianDB[typeName] = {};
-  end
-  xianDB[typeName][spell] = sets;
 end
