@@ -26,10 +26,19 @@ local function debugPrint (...)
   end
 end
 
-local function say(talks, idx, player, linkStr, target, spellId, extSpell)
-  local origIdx = idx;
+local function say(...)
+  local talks, origIdx, player, linkStr, target, spellId, extSpell = ...;
+  local idx = origIdx;
+  if talks[1]["random"] == true then
+    idx = math.random(table.getn(talks));
+  end
+  if spellId then
+    idx = origIdx;
+  end
   local ch = "YELL";
-  if IsInInstance() then
+  if talks[idx]["ch"] ~= nil then
+    ch = talks[idx]["ch"];
+  elseif IsInInstance() then
     local instanceName, instanceType = GetInstanceInfo();
     if HasLFGRestrictions() then
       ch = "INSTANCE_CHAT";
@@ -43,15 +52,6 @@ local function say(talks, idx, player, linkStr, target, spellId, extSpell)
       ch = "PARTY";
     end
   end
-  if talks[idx]["ch"] ~= nil then
-    ch = talks[idx]["ch"];
-  end
-  if talks[1]["random"] == true then
-    idx = math.random(table.getn(talks));
-  end
-  if spellId then
-    idx = origIdx;
-  end
   local talk = talks[idx];
   local text = talk["text"];
   if spellId and channelList[spellId] == nil and talk["end"] then
@@ -63,6 +63,8 @@ local function say(talks, idx, player, linkStr, target, spellId, extSpell)
   text = string.gsub(text, "%%target", target);
   if extSpell then
     text = string.gsub(text, "%%tskill", extSpell);
+  else
+    text = string.gsub(text, "%%tskill", "那個啥");
   end
 
   if spellId and channelList[spellId] == nil and spellingList[spellId] == nil then
@@ -77,13 +79,13 @@ local function say(talks, idx, player, linkStr, target, spellId, extSpell)
     if spellId then
       if channelList[spellId] ~= nil then
         C_Timer.After(t, function()
-          say(talks, idx, player, linkStr, target, spellId);
+          say(talks, idx, player, linkStr, target, spellId, extSpell);
         end);
       elseif spellingList[spellId] ~= nil then
         idx = idx + 1;
         if idx <= table.getn(talks) then
           C_Timer.After(t, function()
-            say(talks, idx, player, linkStr, target, spellId);
+            say(talks, idx, player, linkStr, target, spellId, extSpell);
           end);
         end
       end
@@ -91,7 +93,7 @@ local function say(talks, idx, player, linkStr, target, spellId, extSpell)
       idx = idx + 1;
       if idx <= table.getn(talks) then
         C_Timer.After(t, function()
-          say(talks, idx, player, linkStr, target);
+          say(talks, idx, player, linkStr, target, nil, extSpell);
         end);
       end
     end
