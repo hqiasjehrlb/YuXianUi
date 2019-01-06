@@ -207,9 +207,8 @@ function xianCore.create()
 
   -- register events 
   coreFrame:RegisterEvent("UNIT_SPELLCAST_SENT");
-  coreFrame:RegisterEvent("UNIT_SPELLCAST_START");
-  coreFrame:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED");
   coreFrame:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START");
+  coreFrame:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED");
   coreFrame:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
   coreFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 
