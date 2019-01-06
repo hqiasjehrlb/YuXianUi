@@ -107,8 +107,7 @@ local function unitSpellCastS(...)
   local player = UnitName(caster);
   local linkStr = GetSpellLink(spellId);
   local extSpell = GetSpellLink(extSpellId);
-  debugPrint(caster, player, spellId, spellName);
-  if caster == "player" or caster == player or caster == "pet" then
+  if caster == "player" or UnitName("player") == player or caster == "pet" then
     if status == "SUCCEEDED" then
       local talks = xianDB.SUCCESS[spellName]
         or xianDB.SUCCESS[spellId]
@@ -152,7 +151,6 @@ local function unitSpellCastS(...)
         or xianDB.INTERRUPT[spellId]
         or xianDB.INTERRUPT[tostring(spellId)];
       if talks ~= nil and talks[1] ~= nil then
-        debugPrint("get talk");
         say(talks, 1, player, linkStr, target, nil, extSpell);
       end
     end
@@ -208,7 +206,6 @@ function xianCore.create()
   coreFrame = coreFrame or CreateFrame("Frame", "xianCore");
 
   -- register events 
-  coreFrame:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
   coreFrame:RegisterEvent("UNIT_SPELLCAST_SENT");
   coreFrame:RegisterEvent("UNIT_SPELLCAST_START");
   coreFrame:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED");
@@ -219,15 +216,22 @@ function xianCore.create()
   coreFrame:SetScript("OnEvent", function(...)
     local _, event = ...;
 
-    if event == "UNIT_SPELLCAST_SUCCEEDED" then
-      unitSpellCastS("SUCCEEDED", select(3, ...));
+    if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+      local _, e, _, _, c, _, _, _, t, _, _, s, _, _, extS = CombatLogGetCurrentEventInfo();
+      spellTarget[s] = t;
+      debugPrint(e, c, t, s);
+      if e == "SPELL_INTERRUPT" then
+        unitSpellCastS("INTERRUPT", c, _, s, extS);
+      elseif e == "SPELL_CAST_SUCCESS" then
+        spellingList[s] = nil;
+        unitSpellCastS("SUCCEEDED", c, _, s);
+      elseif e == "SPELL_CAST_START" then
+        unitSpellCastS("SPELLSTART", c, _, s);
+      end
     elseif event == "UNIT_SPELLCAST_SENT" then
       local c, t, _, s = select(3, ...);
       spellTarget[s] = t;
       unitSpellCastS("START", c, _, s);
-    elseif event == "UNIT_SPELLCAST_START" then
-      local c, _, s = select(3, ...);
-      unitSpellCastS("SPELLSTART", c, _, s);
     elseif event == "UNIT_SPELLCAST_CHANNEL_START" then
       unitSpellCastS("CHANNEL", select(3, ...));
     elseif event == "UNIT_SPELLCAST_CHANNEL_STOP" then
@@ -236,12 +240,6 @@ function xianCore.create()
     elseif event == "UNIT_SPELLCAST_INTERRUPTED" then
       local _, _, s = select(3, ...);
       spellingList[s] = nil;
-    elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
-      local _, e, _, _, c, _, _, _, t, _, _, s, _, _, extS = CombatLogGetCurrentEventInfo();
-      if (e == "SPELL_INTERRUPT") then
-        spellTarget[s] = t;
-        unitSpellCastS("INTERRUPT", c, _, s, extS);
-      end
     end
   end);
 end
