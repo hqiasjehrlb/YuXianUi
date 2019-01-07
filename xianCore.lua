@@ -104,7 +104,7 @@ local function unitSpellCastS(...)
   local status, caster, _, spellId, extSpellId = ...;
   local spellName = GetSpellInfo(spellId);
   local target = spellTarget[spellId] or "";
-  local player = UnitName(caster);
+  local player = UnitName(tostring(caster));
   local linkStr = GetSpellLink(spellId);
   local extSpell = GetSpellLink(extSpellId);
   if caster == "player" or UnitName("player") == player or caster == "pet" then
