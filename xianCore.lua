@@ -210,7 +210,7 @@ function xianCore.create()
   coreFrame:RegisterEvent("UNIT_SPELLCAST_CHANNEL_START");
   coreFrame:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED");
   coreFrame:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
-  coreFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+  coreFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
 
   coreFrame:SetScript("OnEvent", function(...)
     local _, event = ...;
