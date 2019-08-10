@@ -216,7 +216,7 @@ function xianCore.create()
     local _, event = ...;
 
     if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-      local _, e, _, _, c, _, _, _, t, _, _, s, _, _, extS = CombatLogGetCurrentEventInfo();
+      local _, e, _, _, c, _, _, _, t, _, _, _, s, _, extS = CombatLogGetCurrentEventInfo();
       spellTarget[s] = t;
       debugPrint(e, c, t, s);
       if e == "SPELL_INTERRUPT" then

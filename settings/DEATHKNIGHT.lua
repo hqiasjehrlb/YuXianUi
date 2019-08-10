@@ -1,4 +1,0 @@
-xianDEATHKNIGHT = { -- DK
-  SEND = {},
-  SUCCESS = {},
-};
