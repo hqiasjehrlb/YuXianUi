@@ -11,14 +11,11 @@
 ## X-Category: Combat
 
 settings/COMMON.lua
-settings/MONK.lua
 settings/WARRIOR.lua
 settings/MAGE.lua
 settings/WARLOCK.lua
 settings/DRUID.lua
-settings/DEATHKNIGHT.lua
 settings/PALADIN.lua
-settings/DEMONHUNTER.lua
 settings/SHAMAN.lua
 settings/PRIEST.lua
 settings/HUNTER.lua
